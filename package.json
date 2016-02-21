@@ -22,6 +22,7 @@
     "eslint-config-airbnb": "^6.0.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",
+    "html-loader": "^0.4.3",
     "html-webpack-plugin": "^2.9.0",
     "loader": "^2.0.0",
     "mkdirp": "^0.5.1",
@@ -37,6 +38,11 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.5.0",
+    "lodash": "^4.5.0",
+    "redux": "^3.3.1",
+    "redux-logger": "^2.5.2",
+    "redux-thunk": "^1.0.3",
+    "url": "^0.11.0",
     "whatwg-fetch": "^0.11.0"
   }
 }

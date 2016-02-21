@@ -3,9 +3,10 @@ global.watch = true;
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const config = require('./config');
+const express = require('express');
 
 const server = new WebpackDevServer(webpack(config), {
-  contentBase: "../build",
+  contentBase: '../build',
   hot: true,
   historyApiFallback: true,
   stats: {
@@ -16,6 +17,8 @@ const server = new WebpackDevServer(webpack(config), {
     children: false,
   }
 });
+
+server.use(express.static('src/assets'));
 
 server.listen(3001, '0.0.0.0', function(err) {
   if (err) console.log(err);

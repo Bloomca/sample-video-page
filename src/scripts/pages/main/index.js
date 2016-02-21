@@ -1,13 +1,18 @@
+import { loadMovies } from 'redux/modules/movies/actions';
+
+import template from './template.html';
+
 class MainPage {
   constructor({ el, store }) {
     this.el = el;
-    // TODO add subscribtion to player and movies
-    // and invoke update with new data
-    // they will re-render only if data was changed
+    store.dispatch(loadMovies());
+    this.unsubscribe = store.subscribe(() => {
+      // TODO add updates to nested components
+    });
   }
 
   render() {
-    this.el.innerHTML = '<div>123</div>';
+    this.el.innerHTML = template;
   }
 }
 

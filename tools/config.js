@@ -45,6 +45,10 @@ const COMMON_LOADERS = [
     test: /\.(eot|ttf|woff|woff2)$/,
     loader: 'file-loader?name=public/assets/[name].[sha512:hash:base64:7].[ext]'
   },
+  {
+    test: /\.html$/,
+    loader: 'html'
+  },
   babelLoader
 ];
 
