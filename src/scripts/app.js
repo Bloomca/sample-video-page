@@ -1,3 +1,5 @@
+import 'styles/common.sass';
+
 import MainPage from 'pages/main';
 import store from './store';
 

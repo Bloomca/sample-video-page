@@ -1,0 +1,23 @@
+.movie-tile
+  cursor: pointer
+
+  &--image-container
+    height: 0
+    padding-bottom: calc(100% / 141 * 199)
+    box-shadow: 2px 4px 10px rgba(#000, 0.15)
+    overflow: hidden
+
+  &--image
+    width: 100%
+    display: block
+    transition: transform 0.25s ease-in-out
+
+    &:hover
+      transform: scale(1.05)
+
+  &--title
+    font-size: 110%
+
+  &--year
+    font-size: 80%
+    color: #ccc
