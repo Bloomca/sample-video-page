@@ -69,8 +69,8 @@ module.exports = {
     'webpack/hot/dev-server'
   ] : [], ['./src/scripts/index.js']),
   output: {
-    path: path.join(__dirname, '../build'),
-    filename: 'public/client.[hash].js'
+    path: path.join(__dirname, '../build/public'),
+    filename: 'client.[hash].js'
   },
   resolve,
   plugins: [
@@ -83,6 +83,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       title: 'Video page',
+      filename: 'index.html',
       template: 'src/index.html', // Load a custom template
       inject: 'body' // Inject all scripts into the body
     })
@@ -94,7 +95,7 @@ module.exports = {
         }
       }),
       new webpack.optimize.AggressiveMergingPlugin(),
-      new ExtractTextPlugin('public/styles/styles.[hash].css')
+      new ExtractTextPlugin('styles/styles.[hash].css')
     ], WATCH ? [
       new webpack.HotModuleReplacementPlugin(),
       new webpack.NoErrorsPlugin()

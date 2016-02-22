@@ -7,7 +7,7 @@
     "test": "eslint src && karma start --single-run --browsers PhantomJS",
     "tdd": "karma start --browsers PhantomJS",
     "start": "node tools/server.js",
-    "build": "node tools/build.js"
+    "build": "node tools/build.js --env prod"
   },
   "author": "seva zaikov <seva.zaikov@gmail.com>",
   "license": "ISC",
@@ -61,6 +61,7 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.5.0",
+    "express": "^4.13.4",
     "lodash": "^4.5.0",
     "normalize.css": "^3.0.3",
     "react": "^0.14.7",
