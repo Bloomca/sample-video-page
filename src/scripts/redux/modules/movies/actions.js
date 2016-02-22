@@ -8,24 +8,32 @@ import {
 
 export const loadMovies = () => {
   return (dispatch, getState) => {
+    const { movies: { lastUpdated, isFetching } } = getState();
+
+    // "should call api middleware"
+    if (isFetching || lastUpdated) return;
+
     dispatch({
       type: FETCH_MOVIES_REQUEST
     });
 
-    get('/movies.json')
-      .then(
-        res => {
-          dispatch({
-            type: FETCH_MOVIES_SUCCESS,
-            payload: res
-          });
-        },
-        error => {
-          dispatch({
-            type: FETCH_MOVIES_FAILURE,
-            error
-          });
-        }
-      );
+    // additional timeout to imititate long waiting
+    setTimeout(() => {
+      get('/movies.json')
+        .then(
+          res => {
+            dispatch({
+              type: FETCH_MOVIES_SUCCESS,
+              payload: res
+            });
+          },
+          error => {
+            dispatch({
+              type: FETCH_MOVIES_FAILURE,
+              error
+            });
+          }
+        );
+    }, 1000);
   };
 };

@@ -9,6 +9,7 @@ import { selectMovie } from 'redux/modules/player/actions';
 // components declaration
 import MoviesBlock from 'components/movies-block';
 import VideoPlayer from 'components/video-player';
+import LoaderBlock from 'components/loader-block';
 
 class MainPage extends Component {
   static propTypes = {
@@ -37,13 +38,21 @@ class MainPage extends Component {
       ? null
       : items.find(({ id }) => id === movie);
 
+    const content = isFetching
+    ? <LoaderBlock />
+    : (
+      <div>
+        <VideoPlayer movie={movieForVideo} />
+        <MoviesBlock movies={items} selectMovie={this.selectMovieToPlay.bind(this)} />
+      </div>
+    );
+
     return (
       <div>
         <h1>
           {'Video page'}
         </h1>
-        <VideoPlayer movie={movieForVideo} />
-        <MoviesBlock movies={items} selectMovie={this.selectMovieToPlay.bind(this)} />
+        {content}
       </div>
     );
   }

@@ -28,15 +28,16 @@ class Video extends Component {
       });
 
       this.player.on('loadeddata', this.props.finishLoading);
+
+      const { movie } = this.props;
+      if (movie) this.setSource(movie);
     });
   }
 
   componentWillReceiveProps(props) {
-    const { movie, startLoading } = props;
+    const { movie } = props;
     if (movie && !isEqual(movie, this.props.movie)) {
-      this.player.src(adjustStreams(movie.streams));
-      this.player.poster(movie.images.placeholder);
-      startLoading();
+      this.setSource(movie);
     }
   }
 
@@ -46,6 +47,12 @@ class Video extends Component {
 
   componentWillUnmount() {
     if (this.player) this.player.dispose();
+  }
+
+  setSource(movie) {
+    this.player.src(adjustStreams(movie.streams));
+    this.player.poster(movie.images.placeholder);
+    this.props.startLoading();
   }
 
   render() {
@@ -70,7 +77,7 @@ export default class VideoPlayer extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { isLoading: true };
+    this.state = { isLoading: !props.movie };
   }
 
   startLoading() {
