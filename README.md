@@ -18,3 +18,17 @@ To build production version, use:
 npm install
 npm run build
 ```
+
+The result code will be in *build/public* folder. You can run
+```bash
+node build/server.js
+```
+it will run express server on 3000 port serving this folder statically; or you can serve this folder with any server of your preference.
+
+To run tests, use two commands:
+```bash
+npm test
+npm run tdd
+```
+
+New tests should have *-test.js* ending; they will be run automatically.
