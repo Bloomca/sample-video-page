@@ -1,5 +1,17 @@
 import React, { Component, PropTypes } from 'react';
 
+/**
+ * @module overview
+ * videojs wrapper
+ * it isn't needed to prevent updates from react
+ * and to focus only on controlling player.
+ * Right now there are no direct control from this component
+ * except for chaning posters and streams
+ *
+ * Here we deal with player loaded through passed functions
+ * It would be more appropriate to use store for this
+ */
+
 // style declaration
 import './style.sass';
 
@@ -35,6 +47,7 @@ export default class Video extends Component {
         resolve();
       });
 
+      // TODO add errors handling
       this.player.on('loadeddata', this.props.finishLoading);
 
       const { movie } = this.props;
@@ -49,6 +62,7 @@ export default class Video extends Component {
     }
   }
 
+  // never update markup, despite everything
   shouldComponentUpdate() {
     return false;
   }

@@ -15,6 +15,7 @@ export default class VideoPlayer extends Component {
   constructor(props) {
     super(props);
 
+    // TODO add error state
     this.state = { isLoading: !props.movie };
   }
 
@@ -26,6 +27,11 @@ export default class VideoPlayer extends Component {
     this.setState({ isLoading: false });
   }
 
+  /**
+   * @description render meta information if present
+   *
+   * @return {JSX | null} – markup
+   */
   renderMeta() {
     const { movie: { meta = {} } } = this.props;
 
