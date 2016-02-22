@@ -26,18 +26,80 @@ export default class VideoPlayer extends Component {
     this.setState({ isLoading: false });
   }
 
+  renderMeta() {
+    const { movie: { meta = {} } } = this.props;
+
+    const releaseDate = meta.releaseYear
+      ? (
+        <div className="video-container--meta-section">
+          <h5 className="video-container--meta-title">
+            {'Release date'}
+          </h5>
+          <span className="video-container--meta-info">
+            {meta.releaseYear}
+          </span>
+        </div>
+      ) : null;
+
+    const directors = meta.directors && meta.directors.length
+      ? (
+        <div className="video-container--meta-section">
+          <h5 className="video-container--meta-title">
+            {`Director${meta.directors.length > 1 ? 's' : ''}`}
+          </h5>
+            {meta.directors.map(({ name }) => {
+              return (
+                <div className="video-container--meta-info"
+                  key={`director_${name}`}>
+                  {name}
+                </div>
+              );
+            })}
+        </div>
+      ) : null;
+
+    const actors = meta.actors && meta.actors.length
+      ? (
+        <div className="video-container--meta-section">
+          <h5 className="video-container--meta-title">
+            {`Actor${meta.actors.length > 1 ? 's' : ''}`}
+          </h5>
+            {meta.actors.map(({ name }) => {
+              return (
+                <div className="video-container--meta-info"
+                  key={`actor_${name}`}>
+                  {name}
+                </div>
+              );
+            })}
+        </div>
+      ) : null;
+
+    return releaseDate || directors || actors
+      ? (
+        <div className="video-container--meta">
+          {releaseDate}
+          {directors}
+          {actors}
+        </div>
+      ) : null;
+  }
+
   renderInfo() {
     const { movie } = this.props;
 
     if (movie) {
       return (
-        <div>
-          <h2>
-            {movie.title}
-          </h2>
-          <h4>
-            {movie.description}
-          </h4>
+        <div className="video-container--info">
+          <div className="video-container--summary">
+            <h2 className="video-container--title">
+              {movie.title}
+            </h2>
+            <p className="video-container--description">
+              {movie.description}
+            </p>
+          </div>
+          {this.renderMeta()}
         </div>
       );
     }
@@ -51,7 +113,7 @@ export default class VideoPlayer extends Component {
 
     return (
       <div>
-        <div className="video-js-container">
+        <div className="video-container">
           {isLoading && <LoaderBlock />}
           <div style={{ display: isLoading ? 'none' : 'block' }}>
             <Video movie={movie}

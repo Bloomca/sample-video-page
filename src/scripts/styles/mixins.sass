@@ -1,0 +1,8 @@
+=text-overflow
+  overflow: hidden
+  text-overflow: ellipsis
+  white-space: nowrap
+
+=responsive($max, $min: 0)
+  @media only screen and (max-width: ($max * 1px)) and (min-width: ($min * 1px))
+    @content

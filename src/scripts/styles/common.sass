@@ -1,4 +1,13 @@
-.main
+@import "~styles/typography"
+@import "~styles/mixins"
+
+*
+  box-sizing: border-box
+
+.main-container
   width: 100%
   max-width: 1200px
   margin: 0 auto
+
+  +responsive(1200)
+    padding: 0 5%

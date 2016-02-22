@@ -1,3 +1,5 @@
+@import "~styles/mixins"
+
 .movie-tile-container
   display: inline-block
   vertical-align: top
@@ -5,4 +7,15 @@
   margin-right: 40px
 
   &:nth-child(4n)
+    margin-right: 0
+
+  +responsive(650)
+    width: calc(100% / 2 - 50px / 2)
+    margin-right: 50px
+
+    &:nth-child(2n)
+      margin-right: 0
+
+  +responsive(400)
+    width: 100%
     margin-right: 0

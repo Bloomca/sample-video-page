@@ -1,1 +1,42 @@
-.video-js-container
+@import "~styles/mixins"
+
+.video-container
+
+  &--info
+    margin-top: 40px
+    margin-bottom: 50px
+    display: flex
+
+    +responsive(450)
+      display: block
+
+  &--summary
+    flex: 1 1 auto
+
+  &--meta
+    flex: 1 0 auto
+
+  &--meta-section
+    margin-bottom: 15px
+
+  &--title
+    margin-top: 0
+    margin-bottom: 15px
+
+  &--description
+    padding-right: 25px
+
+  &--meta-title
+    margin: 0 0 5px
+
+    +responsive(450)
+      display: inline-block
+      margin-right: 15px
+
+  &--meta-info
+    color: #777
+    line-height: 1.45
+
+    +responsive(450)
+      display: inline-block
+      margin-right: 15px
