@@ -1,35 +1,31 @@
+import React, { Component, PropTypes } from 'react';
+
+// components declaration
 import MovieTile from 'components/movie-tile';
 
+// style declaration
 import './style.sass';
 
-import { template as createTemplate } from 'lodash';
-import tmpl from './template.html';
-
-const template = createTemplate(tmpl);
-
-class MoviesBlock {
-  constructor({ el, movies }) {
-    this.el = el;
-    this.movies = movies;
-  }
-
-  update(movies) {
-    this.movies = movies;
-    this.render();
+export default class MoviesBlock extends Component {
+  static propTypes = {
+    movies: PropTypes.array,
+    selectMovie: PropTypes.func.isRequired
   }
 
   render() {
-    this.el.innerHTML = template({ movies: this.movies.map(({ id }) => id) });
-    this.movieTiles = this.movies.map(movie => {
-      const movieTile = new MovieTile({
-        el: this.el.querySelector(`.movie-tile-${movie.id}`),
-        movie
-      });
-      movieTile.render();
+    const { movies, selectMovie } = this.props;
 
-      return movieTile;
-    });
+    return (
+      <div>
+        {movies.map(movie => {
+          const key = `movie_block_${movie.id}`;
+          return (
+            <div className="movie-tile-container" key={key}>
+              <MovieTile movie={movie} selectMovie={selectMovie} />;
+            </div>
+          );
+        })}
+      </div>
+    );
   }
 }
-
-export default MoviesBlock;

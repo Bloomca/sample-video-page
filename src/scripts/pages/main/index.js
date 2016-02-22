@@ -1,32 +1,61 @@
+import React, { Component, PropTypes } from 'react';
+
 // redux declaration
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 import { loadMovies } from 'redux/modules/movies/actions';
+import { selectMovie } from 'redux/modules/player/actions';
 
 // components declaration
 import MoviesBlock from 'components/movies-block';
+import VideoPlayer from 'components/video-player';
 
-// html & css declaration
-import template from './template.html';
+class MainPage extends Component {
+  static propTypes = {
+    movies: PropTypes.shape({
+      isFetching: PropTypes.bool.isRequired,
+      lastUpdated: PropTypes.number,
+      items: PropTypes.array.isRequired
+    }).isRequired,
+    player: PropTypes.object.isRequired,
+    loadMovies: PropTypes.func.isRequired,
+    selectMovie: PropTypes.func.isRequired
+  };
 
-class MainPage {
-  constructor({ el, store }) {
-    this.el = el;
-    this.store = store;
-    store.dispatch(loadMovies());
-    this.unsubscribe = store.subscribe(() => {
-      const { movies } = this.store.getState();
-      this.moviesBlock.update(movies.items);
-    });
+  componentWillMount() {
+    this.props.loadMovies();
+  }
+
+  selectMovieToPlay(id) {
+    this.props.selectMovie(id);
   }
 
   render() {
-    const { movies } = this.store.getState();
-    this.el.innerHTML = template;
-    this.moviesBlock = new MoviesBlock({
-      el: this.el.querySelector('#movies-container'),
-      movies: movies.items
-    });
-    this.moviesBlock.render();
+    const { movies: { isFetching, items }, player: { movie } } = this.props;
+
+    const movieForVideo = !movie
+      ? null
+      : items.find(({ id }) => id === movie);
+
+    return (
+      <div>
+        <h1>
+          {'Video page'}
+        </h1>
+        <VideoPlayer movie={movieForVideo} />
+        <MoviesBlock movies={items} selectMovie={this.selectMovieToPlay.bind(this)} />
+      </div>
+    );
   }
 }
 
-export default MainPage;
+const mapStateToProps = createStructuredSelector({
+  movies: state => state.movies,
+  player: state => state.player
+});
+
+const mapDispatchToProps = {
+  loadMovies, selectMovie
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage);

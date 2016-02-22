@@ -1,8 +1,13 @@
 {
   "parser": "babel-eslint",
-  "extends": "airbnb/base",
+  "extends": "airbnb",
   "rules": {
     "arrow-body-style": [0],
-    "comma-dangle": [0]
+    "comma-dangle": [0],
+    "space-before-function-paren": [0],
+
+    "react/jsx-closing-bracket-location": [0],
+    "react/jsx-no-bind": [0],
+    "react/no-multi-comp": [0]
   }
 }

@@ -32,6 +32,12 @@ const COMMON_LOADERS = [
     loader: 'json'
   },
   {
+    test: /\.css$/,
+    loader: DEBUG
+      ? 'style-loader!css-loader!postcss-loader'
+      : ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader')
+  },
+  {
     test: /\.sass$/,
     loader: DEBUG
       ? 'style-loader!css-loader!postcss-loader!sass-loader?indentedSyntax'
@@ -40,6 +46,10 @@ const COMMON_LOADERS = [
   {
     test: /\.(png|svg|jpe?g|gif)$/,
     loader: 'url-loader?limit=1000&name=public/assets/[name].[sha512:hash:base64:7].[ext]'
+  },
+  {
+    test: /\.(eot|ttf|woff|woff2)$/,
+    loader: 'file-loader?name=public/assets/[name].[sha512:hash:base64:7].[ext]'
   },
   {
     test: /\.html$/,
